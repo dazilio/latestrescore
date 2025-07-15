@@ -1,0 +1,122 @@
+Your task is to evaluate the following resume using a strict 28-rule framework and produce a transparent JSON response.
+
+---
+
+Instructions:
+- Analyze the resume using all 28 rules listed below.
+- Return a JSON array with 28 rule objects and 1 summary object.
+- Do not return any text or formatting outside the JSON block.
+- Respond in pure JSON (no Markdown, no commentary).
+- Use exact field names and structure.
+
+---
+
+Each rule object must include:
+- "rule": Name of the rule (string)
+- "category": Category it belongs to (string)
+- "weight": Importance from 1–20 (integer)
+- "penalty": Score from 0–10 (integer)
+- "weighted_penalty": penalty × weight (integer)
+- "note": Reason for penalty (string)
+- "suggestion": How to fix or improve (string)
+- "trigger": Matching resume phrase(s), or "Section not found", or null
+- "keywords": Comma-separated keywords found/expected, or null
+
+"summary" object must include:
+- "total_weighted_penalty": Sum of all (penalty × weight) from the 28 rules
+- "max_possible_penalty": Always 820 (sum of 28 rules with max penalty × weight)
+- "final_score": 100 - (total_weighted_penalty / 820 × 100), rounded to 1 decimal
+- "grade": Based on final_score:
+    - 90–100: "Excellent"
+    - 75–89: "Strong"
+    - 60–74: "Fair"
+    - 40–59: "Weak"
+    - < 40: "Needs Work"
+- "overview": One-sentence evaluation of overall resume quality
+- "top_3_actionable_fixes": List of the 3 most impactful, specific changes to improve the resume
+
+---
+
+Penalty scale (0–10):
+0 = Fully meets the rule.
+1–2 = Minor issue.
+3–4 = Somewhat lacking.
+5–6 = Noticeably flawed.
+7–8 = Major issue.
+9–10 = Critical or completely missing.
+
+---
+
+Rule List:
+
+1. Skills (Keyword Relevance, 12)
+2. Job Fit / Targeting (Keyword Relevance, 5)
+3. Analytical Keywords (Keyword Relevance, 3)
+4. Teamwork Indicators (Keyword Relevance, 2)
+5. Leadership Indicators (Keyword Relevance, 2)
+6. Drive & Initiative (Keyword Relevance, 2)
+7. Communication Skills (Keyword Relevance, 2)
+8. Summary Length & Presence (Resume Structure & Formatting, 3)
+9. Education Quality (Resume Structure & Formatting, 4)
+10. Date Formatting & Chronology (Resume Structure & Formatting, 4)
+11. Resume Length & Detail (Resume Structure & Formatting, 3)
+12. Contact Details Completeness (Resume Structure & Formatting, 3)
+13. Unnecessary Sections (Resume Structure & Formatting, 2)
+14. Career Growth / Progression (Work Experience & Chronology, 8)
+15. Responsibilities (Vague Content) (Work Experience & Chronology, 10)
+16. Quantified Impact (Numbers / KPIs) (Work Experience & Chronology, 20)
+17. Word Repetition (Readability & Writing Style, 1)
+18. Personal Pronouns (Readability & Writing Style, 4)
+19. Filler Words (Readability & Writing Style, 4)
+20. Weak Verbs (Readability & Writing Style, 6)
+21. Buzzwords / Fluff (Readability & Writing Style, 5)
+22. Readability (Readability & Writing Style, 2)
+23. Verb Tenses Consistency (Readability & Writing Style, 2)
+24. Active Voice Usage (Readability & Writing Style, 5)
+25. Bullet Lengths (Formatting Consistency, 2)
+26. Bullet Format Consistency (Formatting Consistency, 2)
+27. Use of Bullets vs Paragraphs (Formatting Consistency, 2)
+28. Page Density / Whitespace Balance (Formatting Consistency, 1)
+
+---
+
+Scoring Guidelines:
+
+Apply the following guidelines to determine penalties based on the presence, quality, or absence of content in the resume. Use the penalty scale from 0 to 10.
+
+Rule-Based Penalty Guidelines:
+
+For each rule, use these specific guidelines to apply penalty scores:
+
+1. Skills: Missing = 10, too short (<5 skills) = 6, lacks job-relevant terms = 3–4
+2. Job Fit / Targeting: Generic = 10, loosely tailored = 5–6, role-aligned = 0–2
+3. Analytical Keywords: No terms like analyze/data = 10, some = 3–6, 1 clear mention = 1
+4. Teamwork Indicators: Missing terms like collaborate = 10, some team verbs = 3–6, 1 instance = 1
+5. Leadership Indicators: No “led/mentored” = 10, soft examples = 4–6, 1+ direct leadership = 0–2
+6. Drive & Initiative: No signs of proactivity = 10, vague action verbs = 4–6, clear examples = 0–2
+7. Communication Skills: No mention of presentation/collaboration = 10, implied only = 5–6, clear = 1
+8. Summary: Missing = 10, vague/too short = 5–6, informative = 0
+9. Education: Missing = 10, incomplete (no degree/date) = 6–8, full info = 0
+10. Dates: Inconsistent or missing = 8–10, minor format issues = 3–4, consistent = 0
+11. Resume Length: >2 pages or no detail = 5–10, slightly long/short = 3–4, proper = 0
+12. Contact Info: Missing phone/email/LinkedIn = 5–8, all missing = 10, complete = 0
+13. Unnecessary Sections: Includes hobbies/objective = 5–10, clean = 0
+14. Career Growth: No progress = 7–10, unclear = 4–6, clear trajectory = 0–2
+15. Responsibilities: Vague tasks = 8–10, mixed clarity = 4–6, strong/action-based = 0
+16. Quantified Impact: No metrics = 10, soft/qualitative only = 5–6, only one metric found = 2, clear KPIs = 0
+17. Word Repetition: Heavy reuse = 6–10, mild = 3–4, varied = 0
+18. Personal Pronouns: Any use of “I”, “my”, etc. = 10, none = 0
+19. Filler Words: “Responsible for”, “worked on”, etc. = 6–10, moderate = 3–5, clean = 0
+20. Weak Verbs: “Helped”, “participated”, etc. = 6–10, moderate = 3–5, strong verbs = 0
+21. Buzzwords: “Synergy”, “go-getter”, etc. = 6–10, 1–2 uses = 3–5, clean = 0
+22. Readability: Cramped text or long sentences = 6–10, slightly dense = 3–4, clean = 0
+23. Verb Tenses: Mixed in same role = 6–10, occasional = 3–4, correct = 0
+24. Active Voice: Passive verbs = 8–10, some mix = 4–6, active = 0
+25. Bullet Lengths: >3 lines = 8–10, some = 4–6, short = 0
+26. Bullet Format: Inconsistent bullet marks = 6–10, 1–2 issues = 3–4, consistent = 0
+27. Bullets vs Paragraphs: Uses paragraphs = 6–10, some mix = 4–6, bullet-based = 0
+28. Page Density: Crowded or low spacing = 6–10, slightly dense = 4–6, good spacing = 0
+
+Use consistent logic across all resumes. Do not skip rules.
+
+Now evaluate the following resume input and return your JSON response:

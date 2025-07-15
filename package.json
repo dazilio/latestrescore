@@ -1,0 +1,32 @@
+{
+  "name": "ats-resume-evaluator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.17",
+    "formidable": "^3.5.1",
+    "lucide-react": "^0.525.0",
+    "mammoth": "^1.9.1",
+    "next": "13.4.19",
+    "next-themes": "^0.4.6",
+    "openai": "^4.27.0",
+    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^3.11.174",
+    "postcss": "^8.4.25",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "eslint": "8.56.0",
+    "eslint-config-next": "13.4.19",
+    "typescript": "^5.2.2"
+  }
+}
