@@ -6,4 +6,4 @@ build/
 .env.local
 .env.*.local
 .next
-.txt
+*.txt
